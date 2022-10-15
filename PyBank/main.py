@@ -3,7 +3,7 @@ import os
 import csv
 os.getcwd()
 os.chdir(r'C:\Users\30798\Desktop\Python\Module_03_Python2\Python-Challenge\PyBank\Resources')
-# c:/Users/30798/Desktop/Python/Module_03_Python2/Python-Challenge/PyBank/Resources')
+
 count = 0
 net = 0
 current_value = 0
@@ -44,16 +44,19 @@ def average(numbers):
         total += number
     return total/length
 
-
 avg = average(change)
 avg = round(avg, 2)
-# print(f"{count}")
-# print(f"{net}")
-# print(f"{change}")
-#check = len(change)
-# print(f"{check}")
+
 print(f"Total months: {count}")
 print(f"Total: ${net}")
 print(f"Average change: ${avg}")
 print(f"Greatest increase in profits: {inc_month} (${inc})")
 print(f"Greatest decrease in profits: {dcr_month} (${dcr})")
+
+lines = [(f"Total months: {count}"), (f"Total: ${net}"), (f"Average change: ${avg}"), (f"Greatest increase in profits: {inc_month} (${inc})"),
+         (f"Greatest decrease in profits: {dcr_month} (${dcr})")]
+os.chdir(r'C:\Users\30798\Desktop\Python\Module_03_Python2\Python-Challenge\PyBank\analysis')
+with open('Analysis.txt', 'w') as a:
+    for line in lines:
+        a.write(line)
+        a.write('\n')
