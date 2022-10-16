@@ -4,6 +4,7 @@ os.chdir(r'C:\Users\30798\Desktop\Python\Module_03_Python2\Python-Challenge\PyPo
 total = 0
 list_cand = []
 tally = []
+per = []
 
 with open("election_data.csv", "r") as file:
     ed = csv.reader(file, delimiter=",")
@@ -14,30 +15,50 @@ with open("election_data.csv", "r") as file:
         total = int(total) + 1
     for name in list_cand:
         tally.append(0)
-        #i = int(list_cand.index(name))
-        # if row[2] == name:
-        #tally[i] = int(tally[i]) + 1
 with open("election_data.csv", "r") as file:
     eds = csv.reader(file, delimiter=",")
     next(eds, None)
     for row in eds:
-        # for name in list_cand:
+        for name in list_cand:
+            i = list_cand.index(name)
+            if row[2] == list_cand[i]:
+                tally[i] += 1
+for votes in tally:
+    ita = tally.index(votes)
+    value = tally[ita]/total*100
+    value = round(value, 3)
+    per.append(value)
 
-        if row[2] == list_cand[0]:
+print("Election Results")
+print("-------------------------")
+print(f"Total Votes: {total}")
+print("-------------------------")
 
-            #i = list_cand.index(name)
-            tally[0] = tally[0] + 1
-        elif row[2] == list_cand[1]:
-            tally[1] = tally[1] + 1
-        else:
-            tally[2] = tally[2] + 1
+a = 0
+max = 0
+for n in per:
+    if n > max:
+        a = per.index(n)
+        max = n
+winner = list_cand[a]
 
+lines = [("Election Results"), ("-------------------------"),
+         (f"Total Votes: {total}"), ("-------------------------")]
 
-print(f"{list_cand}")
-print(f"{total}")
-print(f"{tally}")
+for name in list_cand:
+    j = list_cand.index(name)
+    print(f"{list_cand[j]}: {per[j]}% ({tally[j]})")
+    lines.append((f"{list_cand[j]}: {per[j]}% ({tally[j]})"))
 
-candidates = {}
-candidates["Name"] = list_cand
+lines.append(("-------------------------"))
+lines.append((f"Winner: {winner}"))
+lines.append(("-------------------------"))
 
-# candidates["Tally"] =
+print("-------------------------")
+print(f"Winner: {winner}")
+
+os.chdir(r'C:\Users\30798\Desktop\Python\Module_03_Python2\Python-Challenge\PyPoll\analysis')
+with open('Analysis.txt', 'w') as b:
+    for line in lines:
+        b.write(line)
+        b.write('\n')

@@ -5,8 +5,6 @@ total = 0
 list_cand = []
 tally = []
 per = []
-candidates = {}
-
 
 with open("election_data.csv", "r") as file:
     ed = csv.reader(file, delimiter=",")
@@ -17,9 +15,6 @@ with open("election_data.csv", "r") as file:
         total = int(total) + 1
     for name in list_cand:
         tally.append(0)
-        #i = int(list_cand.index(name))
-        # if row[2] == name:
-        #tally[i] = int(tally[i]) + 1
 with open("election_data.csv", "r") as file:
     eds = csv.reader(file, delimiter=",")
     next(eds, None)
@@ -28,23 +23,17 @@ with open("election_data.csv", "r") as file:
             i = list_cand.index(name)
             if row[2] == list_cand[i]:
                 tally[i] += 1
-        # if row[2] == list_cand[0]:
-        #     tally[0] = tally[0] + 1
-        # elif row[2] == list_cand[1]:
-        #     tally[1] = tally[1] + 1
-        # else:
-        #     tally[2] = tally[2] + 1
 for votes in tally:
     ita = tally.index(votes)
     value = tally[ita]/total*100
     value = round(value, 3)
     per.append(value)
 
-print(f"{list_cand}")
-print(f"{total}")
-print(f"{tally}")
-print(f"{per}")
-outcome = zip(list_cand, per, tally)
+print("Election Results")
+print("-------------------------")
+print(f"Total Votes: {total}")
+print("-------------------------")
+
 a = 0
 max = 0
 for n in per:
@@ -52,4 +41,24 @@ for n in per:
         a = per.index(n)
         max = n
 winner = list_cand[a]
-print(winner)
+
+lines = [("Election Results"), ("-------------------------"),
+         (f"Total Votes: {total}"), ("-------------------------")]
+
+for name in list_cand:
+    j = list_cand.index(name)
+    print(f"{list_cand[j]}: {per[j]}% ({tally[j]})")
+    lines.append((f"{list_cand[j]}: {per[j]}% ({tally[j]})"))
+
+lines.append(("-------------------------"))
+lines.append((f"Winner: {winner}"))
+lines.append(("-------------------------"))
+
+print("-------------------------")
+print(f"Winner: {winner}")
+
+os.chdir(r'C:\Users\30798\Desktop\Python\Module_03_Python2\Python-Challenge\PyPoll\analysis')
+with open('Analysis.txt', 'w') as b:
+    for line in lines:
+        b.write(line)
+        b.write('\n')
