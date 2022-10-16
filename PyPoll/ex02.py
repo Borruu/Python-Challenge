@@ -4,6 +4,9 @@ os.chdir(r'C:\Users\30798\Desktop\Python\Module_03_Python2\Python-Challenge\PyPo
 total = 0
 list_cand = []
 tally = []
+per = []
+candidates = {}
+
 
 with open("election_data.csv", "r") as file:
     ed = csv.reader(file, delimiter=",")
@@ -21,23 +24,32 @@ with open("election_data.csv", "r") as file:
     eds = csv.reader(file, delimiter=",")
     next(eds, None)
     for row in eds:
-        # for name in list_cand:
-
-        if row[2] == list_cand[0]:
-
-            #i = list_cand.index(name)
-            tally[0] = tally[0] + 1
-        elif row[2] == list_cand[1]:
-            tally[1] = tally[1] + 1
-        else:
-            tally[2] = tally[2] + 1
-
+        for name in list_cand:
+            i = list_cand.index(name)
+            if row[2] == list_cand[i]:
+                tally[i] += 1
+        # if row[2] == list_cand[0]:
+        #     tally[0] = tally[0] + 1
+        # elif row[2] == list_cand[1]:
+        #     tally[1] = tally[1] + 1
+        # else:
+        #     tally[2] = tally[2] + 1
+for votes in tally:
+    ita = tally.index(votes)
+    value = tally[ita]/total*100
+    value = round(value, 3)
+    per.append(value)
 
 print(f"{list_cand}")
 print(f"{total}")
 print(f"{tally}")
-
-candidates = {}
-candidates["Name"] = list_cand
-
-# candidates["Tally"] =
+print(f"{per}")
+outcome = zip(list_cand, per, tally)
+a = 0
+max = 0
+for n in per:
+    if n > max:
+        a = per.index(n)
+        max = n
+winner = list_cand[a]
+print(winner)
