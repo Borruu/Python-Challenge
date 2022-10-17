@@ -1,7 +1,8 @@
 from calendar import month
 import os
 import csv
-file = 'Resources/budget_data.csv'
+os.getcwd()
+os.chdir(r'C:\Users\30798\Desktop\Python\Module_03_Python2\Python-Challenge\PyBank\Resources')
 
 count = 0
 net = 0
@@ -15,7 +16,7 @@ inc_month = "month"
 dcr = 0
 dcr_month = "month"
 
-with open(file, "r", encoding="utf") as budget:
+with open("budget_data.csv", "r", encoding="utf") as budget:
     rb = csv.reader(budget, delimiter=",")
     header = next(budget)
 
@@ -43,7 +44,6 @@ def average(numbers):
         total += number
     return total/length
 
-
 avg = average(change)
 avg = round(avg, 2)
 
@@ -55,9 +55,8 @@ print(f"Greatest decrease in profits: {dcr_month} (${dcr})")
 
 lines = [(f"Total months: {count}"), (f"Total: ${net}"), (f"Average change: ${avg}"), (f"Greatest increase in profits: {inc_month} (${inc})"),
          (f"Greatest decrease in profits: {dcr_month} (${dcr})")]
-# os.chdir(r'C:\Users\30798\Desktop\Python\Module_03_Python2\Python-Challenge\PyBank\analysis')
-file_a = 'analysis/Analysis.txt'
-with open(file_a, 'w') as a:
+os.chdir(r'C:\Users\30798\Desktop\Python\Module_03_Python2\Python-Challenge\PyBank\analysis')
+with open('Analysis.txt', 'w') as a:
     for line in lines:
         a.write(line)
         a.write('\n')
