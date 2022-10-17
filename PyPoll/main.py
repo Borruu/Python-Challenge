@@ -1,12 +1,13 @@
 import os
 import csv
-os.chdir(r'C:\Users\30798\Desktop\Python\Module_03_Python2\Python-Challenge\PyPoll\Resources')
+# os.chdir(r'C:\Users\30798\Desktop\Python\Module_03_Python2\Python-Challenge\PyPoll\Resources')
+path = 'Resources/election_data.csv'
 total = 0
 list_cand = []
 tally = []
 per = []
 
-with open("election_data.csv", "r") as file:
+with open(path, "r") as file:
     ed = csv.reader(file, delimiter=",")
     next(ed, None)
     for row in ed:
@@ -15,7 +16,7 @@ with open("election_data.csv", "r") as file:
         total = int(total) + 1
     for name in list_cand:
         tally.append(0)
-with open("election_data.csv", "r") as file:
+with open(path, "r") as file:
     eds = csv.reader(file, delimiter=",")
     next(eds, None)
     for row in eds:
@@ -57,8 +58,9 @@ lines.append(("-------------------------"))
 print("-------------------------")
 print(f"Winner: {winner}")
 
-os.chdir(r'C:\Users\30798\Desktop\Python\Module_03_Python2\Python-Challenge\PyPoll\analysis')
-with open('Analysis.txt', 'w') as b:
+# os.chdir(r'C:\Users\30798\Desktop\Python\Module_03_Python2\Python-Challenge\PyPoll\analysis')
+path_a = 'analysis/Analysis.txt'
+with open(path_a, 'w') as b:
     for line in lines:
         b.write(line)
         b.write('\n')
